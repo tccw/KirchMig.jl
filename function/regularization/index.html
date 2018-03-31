@@ -402,8 +402,65 @@
                 
                   <h1>Regularization</h1>
                 
-                <div class="codehilite"><pre><span></span>LaplacianMap
-</pre></div>
+                <p><a id='KirchMig.LaplacianMap' href='#KirchMig.LaplacianMap'>#</a>
+<strong><code>KirchMig.LaplacianMap</code></strong> &mdash; <em>Function</em>.</p>
+<p><code>LaplacianMap([T,] n...) -&gt; Δ</code></p>
+<p>Construct a discretized Laplacian operator Δ which will act on an <code>AbstractVector</code>.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>T</code> : <code>Type</code>, optional</li>
+</ul>
+<p><code>Type</code> of argument of <code>Δ</code>.</p>
+<ul>
+<li><code>n...</code></li>
+</ul>
+<p>Sequence of spatial dimensions of <code>Δ</code>.</p>
+<p><strong>Usage</strong></p>
+<ul>
+<li>Forward map and Adjoint maps</li>
+</ul>
+<p>The forward map <code>Δ</code> multiplies a model vector of size <code>nz × nx × ny × ...</code> its second order derivative. It is symmetric.</p>
+<p><strong>Description</strong></p>
+<p>The forward and adjoint maps computes the following operation</p>
+<p>
+<script type="math/tex; mode=display">
+Δx = \sum_{i} δ_i x
+</script>
+</p>
+<p>where </p>
+<p>
+<script type="math/tex; mode=display">
+δ_l x_{i,j,k,...} = - x_{...,l+1,...} + 2x_{...,l,...} - x_{...,l-1,...}
+</script>
+</p>
+<p><a target='_blank' href='https://github.com/cako/KirchMig.jl/blob/34d2707caa7f0ea58c2f0aab2df3d8d15d25b92e/src/regularization.jl#L51-L83' class='documenter-source'>source</a><br></p>
+<p><a id='KirchMig.DiffZMap' href='#KirchMig.DiffZMap'>#</a>
+<strong><code>KirchMig.DiffZMap</code></strong> &mdash; <em>Function</em>.</p>
+<p><code>DiffZMap([T,] n...) -&gt; δz</code></p>
+<p>Construct a discretized z-derivative operator δz which will act on an <code>AbstractVector</code>.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>T</code> : <code>Type</code>, optional</li>
+</ul>
+<p><code>Type</code> of argument of <code>δz</code>.</p>
+<ul>
+<li><code>n...</code></li>
+</ul>
+<p>Sequence of spatial dimensions of <code>δz</code>.</p>
+<p><strong>Usage</strong></p>
+<ul>
+<li>Forward map and Adjoint maps</li>
+</ul>
+<p>The forward map <code>δz</code> multiplies a model vector of size <code>nz × nx × ny × ...</code> its first order z-derivative. The adjoint map is minus the forward map.</p>
+<p><strong>Description</strong></p>
+<p>The forward map computes the following operation</p>
+<p>
+<script type="math/tex; mode=display">
+δz x_{i,j,k,...} = (x_{l+1,...} - x_{l-1,...})/2
+</script>
+</p>
+<p>and the adjoint map computes <code>-δz</code>.</p>
+<p><a target='_blank' href='https://github.com/cako/KirchMig.jl/blob/34d2707caa7f0ea58c2f0aab2df3d8d15d25b92e/src/regularization.jl#L87-L116' class='documenter-source'>source</a><br></p>
                 
                   
                 
